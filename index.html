@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HP Zone-K | Nursery Teachers Meeting Registration</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect fill='%232e7d32' width='32' height='32' rx='6'/><text x='16' y='22' text-anchor='middle' fill='white' font-size='14' font-weight='bold' font-family='Arial'>HP</text></svg>">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="page-header">
+    <div class="header-top-bar">
+      <span><i class="fas fa-building-columns"></i> &nbsp;EEDP Section | HP Zone - K</span>
+      <a href="#check-section"><i class="fas fa-search"></i> Check Registration</a>
+    </div>
+    <div class="header-main">
+      <div class="header-brand">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Emblem_of_Himachal_Pradesh.svg/150px-Emblem_of_Himachal_Pradesh.svg.png"
+             alt="HP Emblem"
+             onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2252%22 height=%2252%22><rect fill=%22%23e8f5e9%22 width=%2252%22 height=%2252%22 rx=%228%22/><text x=%2226%22 y=%2230%22 text-anchor=%22middle%22 fill=%22%232e7d32%22 font-size=%2218%22 font-weight=%22bold%22 font-family=%22Arial%22>HP</text></svg>'">
+        <div class="brand-text">
+          <h1>Online Meeting of Nursery Teachers</h1>
+          <p>HP Zone-K | October 2026</p>
+          <span class="brand-badge">EEDP Section</span>
+        </div>
+      </div>
+      <div class="header-actions">
+        <a class="h-btn" href="#check-section"><i class="fas fa-search"></i> Check Status</a>
+        <a class="h-btn primary" href="#reg-form"><i class="fas fa-user-plus"></i> Register</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- Meeting Info -->
+    <div class="meeting-banner">
+      <div class="meeting-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+      <h2 id="meetingTitle">Nursery Teachers' Meeting</h2>
+      <p class="meeting-sub" id="meetingSubtitle">Registration &amp; Verification Form</p>
+      <div class="meeting-meta">
+        <div class="meeting-meta-item"><i class="fas fa-calendar-alt"></i> <span id="meetingDate">October 2026</span></div>
+        <div class="meeting-meta-item"><i class="fas fa-video"></i> <span id="meetingPlatform">Google Meet</span></div>
+        <div class="meeting-meta-item"><i class="fas fa-map-marker-alt"></i> <span>HP Zone-K</span></div>
+        <div class="meeting-meta-item"><i class="fas fa-building-columns"></i> <span id="meetingOrg">EEDP Section</span></div>
+      </div>
+    </div>
+
+    <!-- Notice -->
+    <div class="notice-bar" id="noticeBar">
+      <i class="fas fa-exclamation-triangle"></i>
+      <span id="noticeText">Please ensure you join the Google Meet using the same Gmail account submitted during registration.</span>
+    </div>
+
+    <!-- Registration Form -->
+    <div class="form-card" id="reg-form">
+      <div class="form-card-header">
+        <div class="fch-icon"><i class="fas fa-clipboard-list"></i></div>
+        <div>
+          <h3>Registration Form</h3>
+          <p>All fields marked with <span style="color:#dc2626">*</span> are required</p>
+        </div>
+      </div>
+      <div class="form-card-body">
+        <form id="regForm" onsubmit="submitForm(event)">
+
+          <!-- Full Name -->
+          <div class="field">
+            <label for="fullName">Full Name of Teacher <span class="req">*</span></label>
+            <input type="text" id="fullName" placeholder="Enter your full name as per records" required>
+            <div class="field-error" id="nameErr">Please enter your full name</div>
+          </div>
+
+          <!-- School Name -->
+          <div class="field">
+            <label for="schoolName">Name of School <span class="req">*</span></label>
+            <input type="text" id="schoolName" placeholder="Enter the complete name of your school" required>
+            <div class="field-error" id="schoolErr">Please enter school name</div>
+          </div>
+
+          <!-- Designation & Principal Name -->
+          <div class="field-row">
+            <div class="field">
+              <label for="designation">Designation <span class="req">*</span></label>
+              <select id="designation" required>
+                <option value="">Select Designation</option>
+                <option value="Nursery Teacher">Nursery Teacher</option>
+              </select>
+              <div class="field-error" id="desigErr">Please select designation</div>
+            </div>
+            <div class="field">
+              <label for="principalName">Name of Principal <span class="req">*</span></label>
+              <input type="text" id="principalName" placeholder="Enter principal's name" required>
+              <div class="field-error" id="principalErr">Please enter principal's name</div>
+            </div>
+          </div>
+
+          <!-- Gmail & Mobile -->
+          <div class="field-row">
+            <div class="field">
+              <label for="email">Gmail Address <span class="req">*</span></label>
+              <input type="email" id="email" placeholder="yourname@gmail.com" required>
+              <p class="field-hint"><i class="fas fa-info-circle"></i> Use the same Gmail to join the meeting</p>
+              <div class="field-error" id="emailErr">Please enter a valid Gmail address</div>
+            </div>
+            <div class="field">
+              <label for="mobile">Mobile Number <span class="req">*</span></label>
+              <input type="tel" id="mobile" placeholder="10-digit mobile number" maxlength="10" required>
+              <div class="field-error" id="mobileErr">Please enter a valid 10-digit mobile number</div>
+            </div>
+          </div>
+
+          <!-- Declaration -->
+          <div class="declaration-box">
+            <input type="checkbox" id="declaration">
+            <label for="declaration">
+              <strong>Declaration:</strong> I confirm that the information provided above is correct. I will join the Google Meet using the <strong>same Gmail account</strong> submitted in this registration form.
+            </label>
+          </div>
+          <div class="declaration-error" id="declErr">Please accept the declaration to proceed</div>
+
+          <!-- Submit -->
+          <button type="submit" class="submit-btn" id="submitBtn">
+            <i class="fas fa-paper-plane"></i> Submit Registration
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Check Registration -->
+    <div class="check-section" id="check-section">
+      <h4><i class="fas fa-search"></i> Check Your Registration Status</h4>
+      <div class="check-form">
+        <input type="email" id="checkEmail" placeholder="Enter your registered Gmail address">
+        <button onclick="checkStatus()"><i class="fas fa-search"></i> Check</button>
+      </div>
+      <div class="check-result" id="checkResult"></div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="page-footer">
+    <p>&copy; 2026 EEDP Section | HP Zone-K | Himachal Pradesh Education Department</p>
+    <p style="margin-top:4px;"><a href="admin.html">Admin Panel</a></p>
+  </footer>
+
+  <!-- Success Modal -->
+  <div class="modal-overlay" id="successModal">
+    <div class="modal-box">
+      <div class="m-icon"><i class="fas fa-check"></i></div>
+      <h3>Registration Successful!</h3>
+      <p>Your registration has been submitted. Please note your Registration ID:</p>
+      <div class="reg-id-display" id="modalRegId">HPZK0001</div>
+      <p style="color:#dc2626;font-weight:500;font-size:0.82rem;">
+        <i class="fas fa-exclamation-circle"></i> Save this ID for future reference.
+      </p>
+      <p style="font-size:0.82rem;">
+        Please join the Google Meet using the same Gmail account you registered with.
+      </p>
+      <div class="modal-btns">
+        <button class="m-btn" onclick="closeModal()"><i class="fas fa-times"></i> Close</button>
+        <button class="m-btn primary" onclick="newRegistration()"><i class="fas fa-plus"></i> New Registration</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script>
+    // Load settings
+    window.addEventListener('DOMContentLoaded', async function() {
+      try {
+        var s = await apiGet('getSettings');
+        if (s) {
+          if (s.meeting_title) document.getElementById('meetingTitle').textContent = s.meeting_title;
+          if (s.meeting_subtitle) document.getElementById('meetingSubtitle').textContent = s.meeting_subtitle;
+          if (s.meeting_date) document.getElementById('meetingDate').textContent = s.meeting_date;
+          if (s.meeting_platform) document.getElementById('meetingPlatform').textContent = s.meeting_platform;
+          if (s.organization) document.getElementById('meetingOrg').textContent = s.organization;
+          if (s.notice) document.getElementById('noticeText').textContent = s.notice;
+
+          if (s.registration_open === 'false') {
+            document.getElementById('submitBtn').disabled = true;
+            document.getElementById('submitBtn').innerHTML = '<i class="fas fa-lock"></i> Registrations Closed';
+            document.getElementById('noticeBar').innerHTML = '<i class="fas fa-lock" style="color:#dc2626;"></i><span style="color:#991b1b;">Registrations are currently closed.</span>';
+          }
+        }
+      } catch (e) { console.log('Using defaults.'); }
+    });
+
+    // Validation
+    function validate() {
+      var v = true;
+
+      function chk(id, errId) {
+        if (!document.getElementById(id).value.trim()) {
+          document.getElementById(errId).style.display = 'block'; v = false;
+        } else {
+          document.getElementById(errId).style.display = 'none';
+        }
+      }
+
+      chk('fullName', 'nameErr');
+      chk('schoolName', 'schoolErr');
+      chk('principalName', 'principalErr');
+
+      if (!document.getElementById('designation').value) {
+        document.getElementById('desigErr').style.display = 'block'; v = false;
+      } else {
+        document.getElementById('desigErr').style.display = 'none';
+      }
+
+      var email = document.getElementById('email').value.trim();
+      if (!email || !email.includes('@gmail.com')) {
+        document.getElementById('emailErr').style.display = 'block'; v = false;
+      } else {
+        document.getElementById('emailErr').style.display = 'none';
+      }
+
+      var mob = document.getElementById('mobile').value.trim();
+      if (!mob || mob.length !== 10 || isNaN(mob)) {
+        document.getElementById('mobileErr').style.display = 'block'; v = false;
+      } else {
+        document.getElementById('mobileErr').style.display = 'none';
+      }
+
+      if (!document.getElementById('declaration').checked) {
+        document.getElementById('declErr').style.display = 'block'; v = false;
+      } else {
+        document.getElementById('declErr').style.display = 'none';
+      }
+
+      return v;
+    }
+
+    // Submit
+    async function submitForm(e) {
+      e.preventDefault();
+      if (!validate()) return;
+
+      var btn = document.getElementById('submitBtn');
+      btn.disabled = true;
+      btn.innerHTML = '<div class="spinner white"></div> Submitting...';
+
+      var formData = {
+        fullName: document.getElementById('fullName').value.trim(),
+        schoolName: document.getElementById('schoolName').value.trim(),
+        designation: document.getElementById('designation').value,
+        principalName: document.getElementById('principalName').value.trim(),
+        email: document.getElementById('email').value.trim().toLowerCase(),
+        mobile: document.getElementById('mobile').value.trim()
+      };
+
+      try {
+        var r = await apiPost('submitRegistration', { formData: formData });
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Registration';
+
+        if (r.success) {
+          document.getElementById('modalRegId').textContent = r.regId;
+          document.getElementById('successModal').classList.add('show');
+        } else {
+          showToast(r.message || 'Registration failed.', 'error');
+        }
+      } catch (er) {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Registration';
+        showToast('Server error. Please try again.', 'error');
+      }
+    }
+
+    // Check Status
+    async function checkStatus() {
+      var email = document.getElementById('checkEmail').value.trim().toLowerCase();
+      var rd = document.getElementById('checkResult');
+
+      if (!email) {
+        rd.className = 'check-result show error';
+        rd.innerHTML = '<i class="fas fa-exclamation-circle"></i> Please enter your Gmail address.';
+        return;
+      }
+
+      rd.className = 'check-result show loading';
+      rd.innerHTML = '<div class="spinner"></div><p style="margin-top:8px;color:#64748b;">Checking...</p>';
+
+      try {
+        var result = await apiGet('checkRegistration', { email: email });
+
+        if (result.success) {
+          var reg = result.registration;
+          var statusClass = 'registered';
+          if (reg.status === 'Verified') statusClass = 'verified';
+          if (reg.status === 'Rejected') statusClass = 'rejected';
+
+          rd.className = 'check-result show success';
+          rd.innerHTML =
+            '<div class="check-info">' +
+              '<div><strong>Reg. ID:</strong> ' + reg.regId + '</div>' +
+              '<div><strong>Name:</strong> ' + reg.fullName + '</div>' +
+              '<div><strong>School:</strong> ' + reg.schoolName + '</div>' +
+              '<div><strong>Designation:</strong> ' + reg.designation + '</div>' +
+              '<div><strong>Principal:</strong> ' + reg.principalName + '</div>' +
+              '<div><strong>Gmail:</strong> ' + reg.email + '</div>' +
+              '<div><strong>Mobile:</strong> ' + reg.mobile + '</div>' +
+              '<div><strong>Status:</strong> <span class="status-badge ' + statusClass + '">' + reg.status + '</span></div>' +
+            '</div>';
+        } else {
+          rd.className = 'check-result show error';
+          rd.innerHTML = '<i class="fas fa-exclamation-circle"></i> ' + result.message;
+        }
+      } catch (e) {
+        rd.className = 'check-result show error';
+        rd.innerHTML = '<i class="fas fa-exclamation-circle"></i> Error connecting. Please try again.';
+      }
+    }
+
+    function closeModal() {
+      document.getElementById('successModal').classList.remove('show');
+    }
+
+    function newRegistration() {
+      closeModal();
+      document.getElementById('regForm').reset();
+      window.scrollTo({ top: document.getElementById('reg-form').offsetTop - 80, behavior: 'smooth' });
+    }
+
+    function goAdmin() {
+      var pw = prompt('Enter Admin Password:');
+      if (pw === 'hpzk2026') {
+        setAdminSession();
+        alert('Admin access granted. In a full deployment, this would open the admin dashboard.');
+      } else if (pw !== null) {
+        alert('Invalid password.');
+      }
+    }
+  </script>
+</body>
+</html>

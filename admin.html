@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel | HP Zone-K Nursery Teachers Meeting</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect fill='%232e7d32' width='32' height='32' rx='6'/><text x='16' y='22' text-anchor='middle' fill='white' font-size='14' font-weight='bold' font-family='Arial'>HP</text></svg>">
+  <style>
+    /* ---- LOGIN PAGE ---- */
+    .login-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f5f7f5;
+      padding: 20px;
+    }
+
+    .login-card {
+      background: white;
+      border: 1px solid #e8ecf0;
+      border-radius: 16px;
+      padding: 44px 40px;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    }
+
+    .login-card .login-top {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .login-card .login-icon {
+      width: 64px; height: 64px;
+      background: #e8f5e9;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+    }
+
+    .login-card .login-icon i {
+      font-size: 1.6rem;
+      color: #2e7d32;
+    }
+
+    .login-card h2 {
+      font-size: 1.3rem;
+      color: #1e293b;
+      font-weight: 700;
+    }
+
+    .login-card .login-sub {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      margin-top: 4px;
+    }
+
+    .login-field {
+      margin-bottom: 20px;
+    }
+
+    .login-field label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.82rem;
+      color: #374151;
+      margin-bottom: 7px;
+    }
+
+    .login-input-wrap {
+      position: relative;
+    }
+
+    .login-input-wrap i {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #94a3b8;
+    }
+
+    .login-input-wrap input {
+      width: 100%;
+      padding: 12px 14px 12px 42px;
+      border: 1.5px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 0.92rem;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .login-input-wrap input:focus {
+      border-color: #2e7d32;
+      box-shadow: 0 0 0 3px rgba(46,125,50,0.08);
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 13px;
+      background: #2e7d32;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 8px;
+      transition: all 0.2s;
+    }
+
+    .login-btn:hover {
+      background: #1b5e20;
+    }
+
+    .login-error {
+      background: #fef2f2;
+      color: #991b1b;
+      padding: 11px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      text-align: center;
+      margin-bottom: 16px;
+      display: none;
+      border: 1px solid #fca5a5;
+    }
+
+    .login-back {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .login-back a {
+      color: #64748b;
+      text-decoration: none;
+      font-size: 0.82rem;
+    }
+
+    .login-back a:hover { color: #2e7d32; }
+
+    /* ---- ADMIN DASHBOARD ---- */
+    .admin-page { display: none; }
+    .admin-page.active { display: block; }
+    .login-page.hidden { display: none; }
+
+    .admin-header {
+      background: white;
+      border-bottom: 1px solid #e8ecf0;
+    }
+
+    .admin-header-bar {
+      background: #2e7d32;
+      color: white;
+      padding: 8px 30px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .admin-header-main {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 30px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .admin-header-main h2 {
+      font-size: 1.1rem;
+      color: #1e293b;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .admin-header-main h2 i { color: #2e7d32; }
+
+    .admin-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .a-btn {
+      padding: 8px 16px;
+      border: 1.5px solid #d1d5db;
+      background: white;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: #374151;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .a-btn:hover { border-color: #2e7d32; color: #2e7d32; }
+    .a-btn.danger { color: #dc2626; border-color: #fca5a5; }
+    .a-btn.danger:hover { background: #fef2f2; }
+    .a-btn.green { background: #2e7d32; color: white; border-color: #2e7d32; }
+    .a-btn.green:hover { background: #1b5e20; }
+
+    .admin-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 30px;
+    }
+
+    /* ---- TABS ---- */
+    .tab-nav {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 24px;
+      border-bottom: 2px solid #e8ecf0;
+      padding-bottom: 0;
+    }
+
+    .tab-btn {
+      padding: 10px 20px;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: #64748b;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .tab-btn:hover { color: #2e7d32; }
+    .tab-btn.active {
+      color: #2e7d32;
+      border-bottom-color: #2e7d32;
+      font-weight: 600;
+    }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ---- STATS ---- */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .stat-box {
+      background: white;
+      border: 1px solid #e8ecf0;
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .stat-box .stat-icon {
+      width: 40px; height: 40px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+      font-size: 1rem;
+    }
+
+    .stat-box .stat-num {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .stat-box .stat-label {
+      font-size: 0.78rem;
+      color: #94a3b8;
+      margin-top: 2px;
+    }
+
+    /* ---- TABLE ---- */
+    .table-card {
+      background: white;
+      border: 1px solid #e8ecf0;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .table-top {
+      padding: 16px 20px;
+      border-bottom: 1px solid #e8ecf0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .table-top h3 {
+      font-size: 0.95rem;
+      color: #1e293b;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .table-top h3 i { color: #2e7d32; }
+
+    .table-controls {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .table-controls input {
+      padding: 8px 14px;
+      border: 1.5px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      outline: none;
+      font-family: 'Inter', sans-serif;
+      width: 220px;
+    }
+
+    .table-controls input:focus { border-color: #2e7d32; }
+
+    .table-controls select {
+      padding: 8px 12px;
+      border: 1.5px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      outline: none;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .table-scroll { overflow-x: auto; }
+
+    .data-tbl {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.84rem;
+    }
+
+    .data-tbl th {
+      background: #f8faf8;
+      padding: 11px 14px;
+      text-align: left;
+      font-weight: 600;
+      color: #475569;
+      border-bottom: 2px solid #e8ecf0;
+      white-space: nowrap;
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .data-tbl td {
+      padding: 11px 14px;
+      border-bottom: 1px solid #f1f5f1;
+      vertical-align: middle;
+    }
+
+    .data-tbl tr:hover { background: #fafcfa; }
+
+    .s-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 10px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 600;
+    }
+
+    .s-badge.registered { background: #dbeafe; color: #1d4ed8; }
+    .s-badge.verified { background: #dcfce7; color: #166534; }
+    .s-badge.rejected { background: #fee2e2; color: #991b1b; }
+
+    .t-btn {
+      padding: 4px 10px;
+      border: 1px solid #d1d5db;
+      background: white;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.73rem;
+      margin: 1px;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.2s;
+    }
+
+    .t-btn.verify { color: #166534; border-color: #86efac; }
+    .t-btn.verify:hover { background: #f0fdf4; }
+    .t-btn.reject { color: #dc2626; border-color: #fca5a5; }
+    .t-btn.reject:hover { background: #fef2f2; }
+    .t-btn.delete { color: #991b1b; border-color: #fca5a5; }
+    .t-btn.delete:hover { background: #fef2f2; }
+    .t-btn.undo { color: #d97706; border-color: #fde68a; }
+    .t-btn.undo:hover { background: #fffbeb; }
+
+    .no-data {
+      text-align: center;
+      padding: 50px 20px;
+      color: #94a3b8;
+    }
+
+    .no-data i {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .loading-box {
+      text-align: center;
+      padding: 40px;
+    }
+
+    /* ---- SETTINGS FORM ---- */
+    .settings-card {
+      background: white;
+      border: 1px solid #e8ecf0;
+      border-radius: 10px;
+      padding: 28px;
+      max-width: 700px;
+    }
+
+    .settings-card h3 {
+      font-size: 1rem;
+      color: #1e293b;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .settings-card h3 i { color: #2e7d32; }
+
+    .s-field {
+      margin-bottom: 20px;
+    }
+
+    .s-field label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.82rem;
+      color: #374151;
+      margin-bottom: 6px;
+    }
+
+    .s-field input,
+    .s-field select,
+    .s-field textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1.5px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .s-field textarea {
+      height: 80px;
+      resize: vertical;
+    }
+
+    .s-field input:focus,
+    .s-field select:focus,
+    .s-field textarea:focus {
+      border-color: #2e7d32;
+    }
+
+    .s-field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .save-settings-btn {
+      padding: 12px 28px;
+      background: #2e7d32;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .save-settings-btn:hover {
+      background: #1b5e20;
+    }
+
+    /* ---- EXPORT ---- */
+    .export-section {
+      margin-top: 20px;
+      padding: 20px;
+      background: #f8faf8;
+      border: 1px solid #e8ecf0;
+      border-radius: 10px;
+    }
+
+    .export-section h4 {
+      font-size: 0.9rem;
+      color: #1e293b;
+      margin-bottom: 12px;
+    }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 900px) {
+      .stats-row { grid-template-columns: 1fr 1fr; }
+      .admin-content { padding: 16px; }
+    }
+
+    @media (max-width: 600px) {
+      .stats-row { grid-template-columns: 1fr; }
+      .tab-nav { overflow-x: auto; }
+      .s-field-row { grid-template-columns: 1fr; }
+      .admin-header-main { padding: 12px 16px; }
+      .table-top { padding: 12px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===================== LOGIN PAGE ===================== -->
+  <div class="login-page" id="loginPage">
+    <div class="login-card">
+      <div class="login-top">
+        <div class="login-icon"><i class="fas fa-shield-halved"></i></div>
+        <h2>Admin Login</h2>
+        <p class="login-sub">HP Zone-K | Meeting Management</p>
+      </div>
+
+      <div class="login-error" id="loginError">Invalid credentials. Please try again.</div>
+
+      <form onsubmit="doLogin(event)">
+        <div class="login-field">
+          <label>Admin ID</label>
+          <div class="login-input-wrap">
+            <i class="fas fa-user"></i>
+            <input type="text" id="adminId" placeholder="Enter admin ID" required>
+          </div>
+        </div>
+        <div class="login-field">
+          <label>Password</label>
+          <div class="login-input-wrap">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="adminPw" placeholder="Enter password" required>
+          </div>
+        </div>
+        <button type="submit" class="login-btn" id="loginBtn">
+          <i class="fas fa-sign-in-alt"></i> Login
+        </button>
+      </form>
+
+      <div class="login-back">
+        <a href="index.html"><i class="fas fa-arrow-left"></i> Back to Registration</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== ADMIN DASHBOARD ===================== -->
+  <div class="admin-page" id="adminPage">
+
+    <!-- Admin Header -->
+    <header class="admin-header">
+      <div class="admin-header-bar">
+        <span><i class="fas fa-shield-halved"></i> &nbsp;Admin Panel — HP Zone-K Nursery Teachers Meeting</span>
+        <span id="adminWelcome">Welcome, Admin</span>
+      </div>
+      <div class="admin-header-main">
+        <h2><i class="fas fa-gauge-high"></i> Dashboard</h2>
+        <div class="admin-actions">
+          <button class="a-btn" onclick="loadAll()"><i class="fas fa-sync-alt"></i> Refresh</button>
+          <a class="a-btn" href="index.html" target="_blank"><i class="fas fa-globe"></i> View Site</a>
+          <button class="a-btn danger" onclick="doLogout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="admin-content">
+
+      <!-- Tab Navigation -->
+      <div class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab('overview')" data-tab="overview">
+          <i class="fas fa-chart-bar"></i> Overview
+        </button>
+        <button class="tab-btn" onclick="switchTab('registrations')" data-tab="registrations">
+          <i class="fas fa-users"></i> Registrations
+        </button>
+        <button class="tab-btn" onclick="switchTab('settings')" data-tab="settings">
+          <i class="fas fa-cog"></i> Settings
+        </button>
+      </div>
+
+      <!-- ======== OVERVIEW TAB ======== -->
+      <div class="tab-panel active" id="tab-overview">
+        <div class="stats-row">
+          <div class="stat-box">
+            <div class="stat-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fas fa-users"></i></div>
+            <div class="stat-num" id="stTotal">—</div>
+            <div class="stat-label">Total Registrations</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-icon" style="background:#dcfce7;color:#166534;"><i class="fas fa-check-circle"></i></div>
+            <div class="stat-num" id="stVerified">—</div>
+            <div class="stat-label">Verified</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-icon" style="background:#fef3c7;color:#92400e;"><i class="fas fa-clock"></i></div>
+            <div class="stat-num" id="stPending">—</div>
+            <div class="stat-label">Pending</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-icon" style="background:#dbeafe;color:#1d4ed8;"><i class="fas fa-school"></i></div>
+            <div class="stat-num" id="stSchools">—</div>
+            <div class="stat-label">Unique Schools</div>
+          </div>
+        </div>
+
+        <!-- Recent Registrations Preview -->
+        <div class="table-card">
+          <div class="table-top">
+            <h3><i class="fas fa-clock"></i> Recent Registrations</h3>
+            <button class="a-btn" onclick="switchTab('registrations')"><i class="fas fa-arrow-right"></i> View All</button>
+          </div>
+          <div class="table-scroll">
+            <table class="data-tbl">
+              <thead>
+                <tr>
+                  <th>Reg. ID</th><th>Name</th><th>School</th><th>Gmail</th><th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="recentTbody">
+                <tr><td colspan="5" class="loading-box"><div class="spinner"></div></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======== REGISTRATIONS TAB ======== -->
+      <div class="tab-panel" id="tab-registrations">
+        <div class="table-card">
+          <div class="table-top">
+            <h3><i class="fas fa-list"></i> All Registrations</h3>
+            <div class="table-controls">
+              <input type="text" id="searchInput" placeholder="Search name, school, email..." oninput="filterRegs()">
+              <select id="filterStatus" onchange="filterRegs()">
+                <option value="all">All Status</option>
+                <option value="Registered">Registered</option>
+                <option value="Verified">Verified</option>
+                <option value="Rejected">Rejected</option>
+              </select>
+              <button class="a-btn green" onclick="exportCSV()"><i class="fas fa-download"></i> Export CSV</button>
+            </div>
+          </div>
+          <div class="table-scroll">
+            <table class="data-tbl">
+              <thead>
+                <tr>
+                  <th>Reg. ID</th><th>Full Name</th><th>School</th><th>Designation</th>
+                  <th>Principal</th><th>Gmail</th><th>Mobile</th><th>Date</th>
+                  <th>Status</th><th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="regTbody">
+                <tr><td colspan="10" class="loading-box"><div class="spinner"></div></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Bulk Actions -->
+        <div class="export-section">
+          <h4><i class="fas fa-bolt" style="color:#2e7d32;margin-right:6px;"></i>Bulk Actions</h4>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <button class="a-btn green" onclick="verifyAll()"><i class="fas fa-check-double"></i> Verify All Pending</button>
+            <button class="a-btn" onclick="exportCSV()"><i class="fas fa-file-csv"></i> Download CSV</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======== SETTINGS TAB ======== -->
+      <div class="tab-panel" id="tab-settings">
+        <div class="settings-card">
+          <h3><i class="fas fa-cog"></i> Meeting Settings</h3>
+
+          <div class="s-field">
+            <label>Registration Status</label>
+            <select id="setRegOpen">
+              <option value="true">Open (Accepting Registrations)</option>
+              <option value="false">Closed (Not Accepting)</option>
+            </select>
+          </div>
+
+          <div class="s-field-row">
+            <div class="s-field">
+              <label>Meeting Title</label>
+              <input type="text" id="setTitle">
+            </div>
+            <div class="s-field">
+              <label>Meeting Subtitle</label>
+              <input type="text" id="setSubtitle">
+            </div>
+          </div>
+
+          <div class="s-field-row">
+            <div class="s-field">
+              <label>Organization</label>
+              <input type="text" id="setOrg">
+            </div>
+            <div class="s-field">
+              <label>Meeting Date</label>
+              <input type="text" id="setDate">
+            </div>
+          </div>
+
+          <div class="s-field-row">
+            <div class="s-field">
+              <label>Meeting Platform</label>
+              <input type="text" id="setPlatform">
+            </div>
+            <div class="s-field">
+              <label>Contact Email</label>
+              <input type="text" id="setContactEmail">
+            </div>
+          </div>
+
+          <div class="s-field">
+            <label>Max Registrations</label>
+            <input type="text" id="setMaxReg">
+          </div>
+
+          <div class="s-field">
+            <label>Notice / Important Message</label>
+            <textarea id="setNotice"></textarea>
+          </div>
+
+          <button class="save-settings-btn" onclick="saveSettings()" id="saveSettingsBtn">
+            <i class="fas fa-save"></i> Save Settings
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script>
+    // ============================================
+    // DATA
+    // ============================================
+    var allRegs = [];
+
+    // ============================================
+    // AUTH CHECK ON LOAD
+    // ============================================
+    window.addEventListener('DOMContentLoaded', function() {
+      if (checkAdminSession()) {
+        showDashboard();
+      }
+    });
+
+    // ============================================
+    // LOGIN
+    // ============================================
+    async function doLogin(e) {
+      e.preventDefault();
+      var id = document.getElementById('adminId').value.trim();
+      var pw = document.getElementById('adminPw').value;
+      var btn = document.getElementById('loginBtn');
+
+      btn.disabled = true;
+      btn.innerHTML = '<div class="spinner white"></div> Verifying...';
+      document.getElementById('loginError').style.display = 'none';
+
+      try {
+        var r = await apiPost('verifyAdmin', { id: id, password: pw });
+        if (r.success) {
+          setAdminSession();
+          showDashboard();
+        } else {
+          document.getElementById('loginError').style.display = 'block';
+          btn.disabled = false;
+          btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
+        }
+      } catch (er) {
+        alert('Server error. Please try again.');
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
+      }
+    }
+
+    function showDashboard() {
+      document.getElementById('loginPage').classList.add('hidden');
+      document.getElementById('adminPage').classList.add('active');
+      loadAll();
+    }
+
+    function doLogout() {
+      clearAdminSession();
+      document.getElementById('loginPage').classList.remove('hidden');
+      document.getElementById('adminPage').classList.remove('active');
+      document.getElementById('adminId').value = '';
+      document.getElementById('adminPw').value = '';
+    }
+
+    // ============================================
+    // TAB SWITCHING
+    // ============================================
+    function switchTab(tab) {
+      document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+      document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+      document.getElementById('tab-' + tab).classList.add('active');
+      document.querySelector('[data-tab="' + tab + '"]').classList.add('active');
+
+      if (tab === 'settings') loadSettings();
+    }
+
+    // ============================================
+    // LOAD DATA
+    // ============================================
+    async function loadAll() {
+      showToast('Loading data...', '');
+      loadStats();
+      loadRegistrations();
+    }
+
+    async function loadStats() {
+      try {
+        var st = await apiGet('getStats');
+        document.getElementById('stTotal').textContent = st.total;
+        document.getElementById('stVerified').textContent = st.verified;
+        document.getElementById('stPending').textContent = st.pending;
+        document.getElementById('stSchools').textContent = st.uniqueSchools;
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    async function loadRegistrations() {
+      try {
+        allRegs = await apiGet('getRegistrations');
+        renderFullTable(allRegs);
+        renderRecentTable(allRegs);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    // ============================================
+    // RENDER TABLES
+    // ============================================
+    function renderRecentTable(regs) {
+      var tbody = document.getElementById('recentTbody');
+      if (!regs || !regs.length) {
+        tbody.innerHTML = '<tr><td colspan="5" class="no-data"><i class="fas fa-inbox"></i><br>No registrations yet</td></tr>';
+        return;
+      }
+      var recent = regs.slice(-8).reverse();
+      tbody.innerHTML = '';
+      recent.forEach(function(r) {
+        var sc = r.status === 'Verified' ? 'verified' : (r.status === 'Rejected' ? 'rejected' : 'registered');
+        var tr = document.createElement('tr');
+        tr.innerHTML = '<td><strong>' + r.regId + '</strong></td>' +
+          '<td>' + r.fullName + '</td>' +
+          '<td>' + r.schoolName + '</td>' +
+          '<td>' + r.email + '</td>' +
+          '<td><span class="s-badge ' + sc + '">' + r.status + '</span></td>';
+        tbody.appendChild(tr);
+      });
+    }
+
+    function renderFullTable(regs) {
+      var tbody = document.getElementById('regTbody');
+      if (!regs || !regs.length) {
+        tbody.innerHTML = '<tr><td colspan="10" class="no-data"><i class="fas fa-inbox"></i><br>No registrations found</td></tr>';
+        return;
+      }
+      tbody.innerHTML = '';
+      regs.forEach(function(r) {
+        var sc = r.status === 'Verified' ? 'verified' : (r.status === 'Rejected' ? 'rejected' : 'registered');
+
+        var actionsHTML = '';
+        if (r.status === 'Registered') {
+          actionsHTML = '<button class="t-btn verify" onclick="setStatus(\'' + r.regId + '\',\'Verified\')"><i class="fas fa-check"></i> Verify</button>' +
+            '<button class="t-btn reject" onclick="setStatus(\'' + r.regId + '\',\'Rejected\')"><i class="fas fa-times"></i></button>';
+        } else if (r.status === 'Verified') {
+          actionsHTML = '<button class="t-btn undo" onclick="setStatus(\'' + r.regId + '\',\'Registered\')"><i class="fas fa-undo"></i></button>';
+        } else {
+          actionsHTML = '<button class="t-btn undo" onclick="setStatus(\'' + r.regId + '\',\'Registered\')"><i class="fas fa-undo"></i></button>';
+        }
+        actionsHTML += '<button class="t-btn delete" onclick="deleteReg(\'' + r.regId + '\')"><i class="fas fa-trash"></i></button>';
+
+        var tr = document.createElement('tr');
+        tr.innerHTML = '<td><strong>' + r.regId + '</strong></td>' +
+          '<td>' + r.fullName + '</td>' +
+          '<td>' + r.schoolName + '</td>' +
+          '<td>' + r.designation + '</td>' +
+          '<td>' + r.principalName + '</td>' +
+          '<td style="font-size:0.8rem;">' + r.email + '</td>' +
+          '<td>' + r.mobile + '</td>' +
+          '<td style="font-size:0.78rem;">' + r.regDate + '</td>' +
+          '<td><span class="s-badge ' + sc + '">' + r.status + '</span></td>' +
+          '<td style="white-space:nowrap;">' + actionsHTML + '</td>';
+        tbody.appendChild(tr);
+      });
+    }
+
+    // ============================================
+    // FILTER
+    // ============================================
+    function filterRegs() {
+      var search = document.getElementById('searchInput').value.toLowerCase();
+      var statusF = document.getElementById('filterStatus').value;
+
+      var filtered = allRegs.filter(function(r) {
+        var matchSearch = r.fullName.toLowerCase().includes(search) ||
+          r.schoolName.toLowerCase().includes(search) ||
+          r.email.toLowerCase().includes(search) ||
+          r.regId.toLowerCase().includes(search) ||
+          r.mobile.includes(search);
+        var matchStatus = statusF === 'all' || r.status === statusF;
+        return matchSearch && matchStatus;
+      });
+
+      renderFullTable(filtered);
+    }
+
+    // ============================================
+    // ACTIONS
+    // ============================================
+    async function setStatus(regId, status) {
+      var label = status === 'Verified' ? 'verify' : (status === 'Rejected' ? 'reject' : 'reset status for');
+      if (!confirm('Are you sure you want to ' + label + ' registration ' + regId + '?')) return;
+
+      try {
+        var r = await apiPost('updateStatus', { regId: regId, status: status });
+        showToast(r.message, r.success ? 'success' : 'error');
+        if (r.success) loadAll();
+      } catch (e) {
+        showToast('Error updating status.', 'error');
+      }
+    }
+
+    async function deleteReg(regId) {
+      if (!confirm('Permanently delete registration ' + regId + '? This cannot be undone.')) return;
+
+      try {
+        var r = await apiPost('deleteRegistration', { regId: regId });
+        showToast(r.message, r.success ? 'success' : 'error');
+        if (r.success) loadAll();
+      } catch (e) {
+        showToast('Error deleting.', 'error');
+      }
+    }
+
+    async function verifyAll() {
+      var pending = allRegs.filter(function(r) { return r.status === 'Registered'; });
+      if (!pending.length) {
+        showToast('No pending registrations to verify.', '');
+        return;
+      }
+      if (!confirm('Verify all ' + pending.length + ' pending registrations?')) return;
+
+      showToast('Verifying ' + pending.length + ' registrations...');
+
+      var success = 0;
+      for (var i = 0; i < pending.length; i++) {
+        try {
+          var r = await apiPost('updateStatus', { regId: pending[i].regId, status: 'Verified' });
+          if (r.success) success++;
+        } catch (e) { }
+      }
+
+      showToast(success + ' of ' + pending.length + ' registrations verified!', 'success');
+      loadAll();
+    }
+
+    // ============================================
+    // EXPORT CSV
+    // ============================================
+    function exportCSV() {
+      if (!allRegs.length) {
+        showToast('No data to export.', 'error');
+        return;
+      }
+
+      var headers = ['Reg. ID', 'Full Name', 'School Name', 'Designation', 'Principal Name', 'Gmail', 'Mobile', 'Date', 'Status'];
+      var csv = headers.join(',') + '\n';
+
+      allRegs.forEach(function(r) {
+        var row = [
+          r.regId,
+          '"' + r.fullName.replace(/"/g, '""') + '"',
+          '"' + r.schoolName.replace(/"/g, '""') + '"',
+          r.designation,
+          '"' + r.principalName.replace(/"/g, '""') + '"',
+          r.email,
+          r.mobile,
+          '"' + r.regDate + '"',
+          r.status
+        ];
+        csv += row.join(',') + '\n';
+      });
+
+      var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      var link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'HP_ZoneK_Registrations_' + new Date().toISOString().slice(0,10) + '.csv';
+      link.click();
+
+      showToast('CSV downloaded!', 'success');
+    }
+
+    // ============================================
+    // SETTINGS
+    // ============================================
+    async function loadSettings() {
+      try {
+        var s = await apiGet('getSettings');
+        if (s) {
+          document.getElementById('setRegOpen').value = (String(s.registration_open || 'true').toLowerCase() === 'true') ? 'true' : 'false';
+          document.getElementById('setTitle').value = s.meeting_title || '';
+          document.getElementById('setSubtitle').value = s.meeting_subtitle || '';
+          document.getElementById('setOrg').value = s.organization || '';
+          document.getElementById('setDate').value = s.meeting_date || '';
+          document.getElementById('setPlatform').value = s.meeting_platform || '';
+          document.getElementById('setContactEmail').value = s.contact_email || '';
+          document.getElementById('setMaxReg').value = s.max_registrations || '';
+          document.getElementById('setNotice').value = s.notice || '';
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    async function saveSettings() {
+      var btn = document.getElementById('saveSettingsBtn');
+      btn.disabled = true;
+      btn.innerHTML = '<div class="spinner white"></div> Saving...';
+
+      var settingsObj = {
+        registration_open: document.getElementById('setRegOpen').value,
+        meeting_title: document.getElementById('setTitle').value,
+        meeting_subtitle: document.getElementById('setSubtitle').value,
+        organization: document.getElementById('setOrg').value,
+        meeting_date: document.getElementById('setDate').value,
+        meeting_platform: document.getElementById('setPlatform').value,
+        contact_email: document.getElementById('setContactEmail').value,
+        max_registrations: document.getElementById('setMaxReg').value,
+        notice: document.getElementById('setNotice').value
+      };
+
+      try {
+        var r = await apiPost('updateSettings', { settings: settingsObj });
+        showToast(r.success ? 'Settings saved!' : 'Error saving.', r.success ? 'success' : 'error');
+      } catch (e) {
+        showToast('Server error.', 'error');
+      }
+
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-save"></i> Save Settings';
+    }
+  </script>
+</body>
+</html>
